@@ -9,9 +9,9 @@
 ## App Demonstrations
 
 <p align="center">
-  <img src="https://github.com/Tayfo10/GetirFinalCase/assets/105911315/43ea490f-4abc-4bdc-bbf4-c0acf16118d7" alt="Record 1" width="33%" style="margin-right: 10px;">
-  <img src="https://github.com/Tayfo10/GetirFinalCase/assets/105911315/0859f34c-0d16-4a81-8dd3-9831e9a1bec7" alt="Record 2" width="33%" style="margin-right: 10px;">
-  <img src="https://github.com/Tayfo10/GetirFinalCase/assets/105911315/c3bda04f-f71b-4a4f-a8ae-6ddba6527b47" alt="Record 3" width="33%">
+  <img src="https://github.com/Tayfo10/GetirFinalCase/assets/105911315/43ea490f-4abc-4bdc-bbf4-c0acf16118d7" alt="Record 1" width="30%" style="margin-right: 10px;">
+  <img src="https://github.com/Tayfo10/GetirFinalCase/assets/105911315/0859f34c-0d16-4a81-8dd3-9831e9a1bec7" alt="Record 2" width="30%" style="margin-right: 10px;">
+  <img src="https://github.com/Tayfo10/GetirFinalCase/assets/105911315/c3bda04f-f71b-4a4f-a8ae-6ddba6527b47" alt="Record 3" width="30%">
 </p>
 
 ## Features
