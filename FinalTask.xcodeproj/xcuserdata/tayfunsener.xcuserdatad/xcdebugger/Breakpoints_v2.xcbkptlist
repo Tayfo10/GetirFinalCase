@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "DA4A3EE1-810C-4007-9F0B-7020AF0700CF"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.SymbolicBreakpoint">
+         <BreakpointContent
+            uuid = "F1D0C61D-714C-452F-8D34-973B803ADD46"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            symbolName = "UIViewAlertForUnsatisfiableConstraints"
+            moduleName = "">
+            <Locations>
+               <Location
+                  uuid = "F1D0C61D-714C-452F-8D34-973B803ADD46 - ba3ad5676a792f38"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "UIViewAlertForUnsatisfiableConstraints"
+                  moduleName = "UIKitCore"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
