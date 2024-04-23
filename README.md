@@ -45,4 +45,4 @@ To run this project, clone this repository and open it in Xcode:
 ```bash
 git clone https://github.com/Tayfo10/GetirFinalCase.git
 cd GetirFinalCase
-open App.xcodeproj anything to add?
+open FinalTask.xcodeproj
