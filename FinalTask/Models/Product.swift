@@ -16,11 +16,11 @@ class Product: Codable {
     var squareThumbnailURL: String?
     var quantity: Int = 0
     var attribute: String?
-
+    
     enum CodingKeys: String, CodingKey {
         case id, price, name, priceText, imageURL, squareThumbnailURL, attribute
     }
-
+    
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(String.self, forKey: .id)

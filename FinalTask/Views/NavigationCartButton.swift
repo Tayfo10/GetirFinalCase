@@ -10,7 +10,7 @@ import UIKit
 class NavigationCartButton {
     
     private static var priceLabel: UILabel?
-
+    
     static func createCartButton(target: Any?, action: Selector) -> UIBarButtonItem {
         let containerView = UIView()
         containerView.backgroundColor = .white
@@ -36,25 +36,25 @@ class NavigationCartButton {
             cartButton.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
             cartButton.widthAnchor.constraint(equalToConstant: 34),
             cartButton.heightAnchor.constraint(equalToConstant: 34),
-
+            
             priceLabel.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
             priceLabel.leadingAnchor.constraint(equalTo: cartButton.trailingAnchor, constant: 6),
             priceLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8)
         ])
-
+        
         containerView.heightAnchor.constraint(equalToConstant: 34).isActive = true
         containerView.widthAnchor.constraint(equalToConstant: 88).isActive = true
         priceLabel.isUserInteractionEnabled = true
-
+        
         let labelTapGesture = UITapGestureRecognizer(target: target, action: action)
-                priceLabel.addGestureRecognizer(labelTapGesture)
+        priceLabel.addGestureRecognizer(labelTapGesture)
         cartButton.addTarget(target, action: action, for: .touchUpInside)
-
+        
         let cartBarButtonItem = UIBarButtonItem(customView: containerView)
         updatePrice(newPrice: CartManager.shared.totalPrice)  
         return cartBarButtonItem
     }
-
+    
     static func updatePrice(newPrice: Double) {
         DispatchQueue.main.async {
             priceLabel?.text = String(format: "₺%.2f", newPrice)

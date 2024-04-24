@@ -10,11 +10,11 @@ import Foundation
 class CartManager {
     static let shared = CartManager()
     private(set) var items: [Product] = []
-
+    
     var totalPrice: Double {
         return items.reduce(0) { $0 + $1.price * Double($1.quantity) }
     }
-
+    
     func addProduct(_ product: Product) {
         if let index = items.firstIndex(where: { $0.id == product.id }) {
             items[index].quantity += 1
@@ -30,7 +30,7 @@ class CartManager {
     private func notifyCartUpdated() {
         NotificationCenter.default.post(name: .cartUpdated, object: nil, userInfo: ["totalPrice": totalPrice])
     }
-
+    
     func removeProduct(_ product: Product) {
         guard let index = items.firstIndex(where: { $0.id == product.id }) else { return }
         if items[index].quantity > 1 {
@@ -45,11 +45,11 @@ class CartManager {
     }
     
     func clearCart() {
-            items.removeAll()
-        }
+        items.removeAll()
+    }
     func getCartItems() -> [Product] {
-           return items
-       }
+        return items
+    }
     
     func updateProductQuantity(_ productId: String, newQuantity: Int) {
         if let index = items.firstIndex(where: { $0.id == productId }) {

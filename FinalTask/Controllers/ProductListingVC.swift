@@ -15,8 +15,8 @@ final class ProductListingVC: UICollectionViewController, ProductDetailViewContr
     var verticalProducts: [Product] = []
     var currentImageUrl: String?
     var totalPrice: Double = 0.00 {
-            didSet {updateCartButton()}
-        }
+        didSet {updateCartButton()}
+    }
     
     init() {
         super.init(collectionViewLayout: ProductListingVC.createLayout())
@@ -45,18 +45,18 @@ final class ProductListingVC: UICollectionViewController, ProductDetailViewContr
         NotificationCenter.default.addObserver(self, selector: #selector(itemDeleted(_:)), name: .cartItemDeleted, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleCartCleared), name: .cartCleared, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateCartButton), name: .cartUpdated, object: nil)
-       }
+    }
     
     func configureNavigationBar() {
-            navigationItem.title = "Ürünler"
-            let navBarAppearance = UINavigationBarAppearance()
-            navBarAppearance.configureWithOpaqueBackground()
-            let customFont = UIFont.openSansBold(size: 14)
-            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white, .font: customFont as Any]
-            navBarAppearance.backgroundColor = UIColor(red: 0.36, green: 0.24, blue: 0.74, alpha: 1.00)
-            navigationController?.navigationBar.standardAppearance = navBarAppearance
-            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
-        }
+        navigationItem.title = "Ürünler"
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.configureWithOpaqueBackground()
+        let customFont = UIFont.openSansBold(size: 14)
+        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white, .font: customFont as Any]
+        navBarAppearance.backgroundColor = UIColor(red: 0.36, green: 0.24, blue: 0.74, alpha: 1.00)
+        navigationController?.navigationBar.standardAppearance = navBarAppearance
+        navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+    }
     
     func didAddProductToCart() {
         updateCartButton()
@@ -91,12 +91,12 @@ final class ProductListingVC: UICollectionViewController, ProductDetailViewContr
             }
         }
     }
-
+    
     @objc private func updateCartButton() {
         if let containerView = navigationItem.rightBarButtonItem?.customView,
-               let label = containerView.subviews.compactMap({ $0 as? UILabel }).first {
-                label.text = String(format: "₺%.2f", CartManager.shared.totalPrice)
-            }
+           let label = containerView.subviews.compactMap({ $0 as? UILabel }).first {
+            label.text = String(format: "₺%.2f", CartManager.shared.totalPrice)
+        }
     }
     
     @objc private func handleCartCleared() {
@@ -137,18 +137,18 @@ final class ProductListingVC: UICollectionViewController, ProductDetailViewContr
                 section.orthogonalScrollingBehavior = .continuous
                 return section
             }
-
+            
             if sectionNumber == 1 {
-
+                
                 let itemWidthFraction: CGFloat = 0.93 / 3.0
                 let spacingBetweenItems: CGFloat = 8.0
                 _ = spacingBetweenItems * 2
-
+                
                 let itemSize = NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(itemWidthFraction),
                     heightDimension: .estimated(164.67)
                 )
-
+                
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 item.edgeSpacing = NSCollectionLayoutEdgeSpacing(
                     leading: nil,
@@ -156,20 +156,22 @@ final class ProductListingVC: UICollectionViewController, ProductDetailViewContr
                     trailing: NSCollectionLayoutSpacing.fixed(spacingBetweenItems),
                     bottom: NSCollectionLayoutSpacing.fixed(16)
                 )
-
+                
                 let groupSize = NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(1.0),
                     heightDimension: .estimated(200)
                 )
-
+                
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 group.interItemSpacing = .fixed(spacingBetweenItems)
                 let section = NSCollectionLayoutSection(group: group)
                 section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16)
-
+                
                 return section
-            
-                    } else {return nil}
+                
+            } else {
+                return nil
+            }
         }
     }
     
@@ -222,73 +224,83 @@ final class ProductListingVC: UICollectionViewController, ProductDetailViewContr
     private func configureCartButton() {
         
         
-            
-            let containerView = UIView()
-            containerView.translatesAutoresizingMaskIntoConstraints = false
-            containerView.backgroundColor = .white
-            containerView.layer.cornerRadius = 8
-            containerView.clipsToBounds = true
-            let cartButton = UIButton(type: .custom)
-            cartButton.translatesAutoresizingMaskIntoConstraints = false
-            containerView.addSubview(cartButton)
-            if let cartImage = UIImage(named: "logoImage") {
-                cartButton.setImage(cartImage, for: .normal)
-                cartButton.imageView?.contentMode = .scaleAspectFit
-            }
-
-            let priceLabel = UILabel()
-            priceLabel.translatesAutoresizingMaskIntoConstraints = false
-            priceLabel.text = "₺\(totalPrice)"
-            priceLabel.textColor = UIColor(red: 0.36, green: 0.24, blue: 0.74, alpha: 1.00)
-            priceLabel.font = UIFont(name: "OpenSans-Bold", size: 12)
-            containerView.addSubview(priceLabel)
-
-            if let imageView = cartButton.imageView {
-                imageView.translatesAutoresizingMaskIntoConstraints = false
-                NSLayoutConstraint.activate([
-                    imageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 0),
-                    imageView.widthAnchor.constraint(equalToConstant: 34),
-                    imageView.heightAnchor.constraint(equalToConstant: 34),
-                    priceLabel.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
-                    priceLabel.leadingAnchor.constraint(equalTo: cartButton.imageView!.trailingAnchor, constant: 6),
-                    priceLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
-                    cartButton.topAnchor.constraint(equalTo: containerView.topAnchor),
-                    cartButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
-                    cartButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor)
-                ])
-            }
-
-            containerView.heightAnchor.constraint(equalToConstant: 34).isActive = true
-            containerView.widthAnchor.constraint(equalToConstant: 88).isActive = true
         
-            cartButton.addTarget(self, action: #selector(cartButtonTapped), for: .touchUpInside)
+        let containerView = UIView()
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.backgroundColor = .white
+        containerView.layer.cornerRadius = 8
+        containerView.clipsToBounds = true
+        let cartButton = UIButton(type: .custom)
+        cartButton.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(cartButton)
+        if let cartImage = UIImage(named: "logoImage") {
+            cartButton.setImage(cartImage, for: .normal)
+            cartButton.imageView?.contentMode = .scaleAspectFit
+        }
+        
+        let priceLabel = UILabel()
+        priceLabel.translatesAutoresizingMaskIntoConstraints = false
+        priceLabel.text = "₺\(totalPrice)"
+        priceLabel.textColor = UIColor(red: 0.36, green: 0.24, blue: 0.74, alpha: 1.00)
+        priceLabel.font = UIFont(name: "OpenSans-Bold", size: 12)
+        containerView.addSubview(priceLabel)
+        
+        if let imageView = cartButton.imageView {
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                imageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 0),
+                imageView.widthAnchor.constraint(equalToConstant: 34),
+                imageView.heightAnchor.constraint(equalToConstant: 34),
+                priceLabel.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
+                priceLabel.leadingAnchor.constraint(equalTo: cartButton.imageView!.trailingAnchor, constant: 6),
+                priceLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
+                cartButton.topAnchor.constraint(equalTo: containerView.topAnchor),
+                cartButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+                cartButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor)
+            ])
+        }
+        
+        containerView.heightAnchor.constraint(equalToConstant: 34).isActive = true
+        containerView.widthAnchor.constraint(equalToConstant: 88).isActive = true
+        
+        cartButton.addTarget(self, action: #selector(cartButtonTapped), for: .touchUpInside)
         
         let cartBarButtonItem = NavigationCartButton.createCartButton(target: self, action: #selector(navigateToCartVC))
-            self.navigationItem.rightBarButtonItem = cartBarButtonItem
-        }
+        self.navigationItem.rightBarButtonItem = cartBarButtonItem
+    }
     
     @objc func navigateToCartVC() {
-        let cartVC = ShoppingCartVC()
-        self.navigationController?.pushViewController(cartVC, animated: true)
+        if CartManager.shared.items.count != 0 {
+            let cartVC = ShoppingCartVC()
+            self.navigationController?.pushViewController(cartVC, animated: true)
+        } else {showAlertForEmptyCart()}
+        
+    }
+    
+    func showAlertForEmptyCart() {
+        let alert = UIAlertController(title: "Sepetiniz Boş", message: "Lütfen devam etmek için ürün ekleyiniz.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
     
     @objc func cartButtonTapped() {
         if CartManager.shared.items.count != 0 {
             let controller = ShoppingCartVC()
             navigationController?.pushViewController(controller, animated: true)
-        }
+        } else {showAlertForEmptyCart()}
     }
     
     func loadImage(for cell: ProductListingCollectionViewCell, with urlString: String?) {
         guard let urlString = urlString, let url = URL(string: urlString) else {
             print("Invalid or missing URL string for image.")
             cell.productImageView.image = UIImage(named: "Image1")
+            
             return
         }
         
         cell.productImageView.image = UIImage(named: "defaultPlaceholder")
         cell.currentImageUrl = urlString
-
+        
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data, let image = UIImage(data: data) else {
                 DispatchQueue.main.async {
@@ -309,34 +321,34 @@ final class ProductListingVC: UICollectionViewController, ProductDetailViewContr
     }
     
     // MARK: UICollectionViewDataSource
-
+    
     override func numberOfSections(in collectionView: UICollectionView) -> Int {return 2}
-
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0 {
-                return horizontalProducts.count
-            } else if section == 1 {
-                return verticalProducts.count
-            }
-            return 0
+            return horizontalProducts.count
+        } else if section == 1 {
+            return verticalProducts.count
+        }
+        return 0
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCell", for: indexPath) as! ProductListingCollectionViewCell
-                
-            let product = (indexPath.section == 0) ? horizontalProducts[indexPath.item] : verticalProducts[indexPath.item]
-
-            ImageLoader.loadImage(for: cell.productImageView, with: product.imageURL)
-
-            cell.priceLabel.text = product.priceText
-            cell.productNameLabel.text = product.name
-            cell.attributeLabel.text = "Details"
-            cell.configure(with: product)
-            cell.delegate = self
-            return cell
         
-        }
+        let product = (indexPath.section == 0) ? horizontalProducts[indexPath.item] : verticalProducts[indexPath.item]
+        
+        ImageLoader.loadImage(for: cell.productImageView, with: product.imageURL)
+        
+        cell.priceLabel.text = product.priceText
+        cell.productNameLabel.text = product.name
+        cell.attributeLabel.text = "Details"
+        cell.configure(with: product)
+        cell.delegate = self
+        return cell
+        
+    }
     
     override func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if let cell = cell as? ProductListingCollectionViewCell {
@@ -348,11 +360,11 @@ final class ProductListingVC: UICollectionViewController, ProductDetailViewContr
 extension ProductListingVC: CustomCollectionViewCellDelegate {
     func didChangeProductQuantity(_ cell: ProductListingCollectionViewCell, product: Product, increment: Bool) {
         if increment {
-                    CartManager.shared.addProduct(product)
-                } else {
-                    CartManager.shared.removeProduct(product)
-                }
-                updateCartButton()
+            CartManager.shared.addProduct(product)
+        } else {
+            CartManager.shared.removeProduct(product)
+        }
+        updateCartButton()
         if product.quantity == 0 {
             collectionView.reloadData()
         }
@@ -363,17 +375,17 @@ extension ProductListingVC: CustomCollectionViewCellDelegate {
             return
         }
         let product = indexPath.section == 0 ? horizontalProducts[indexPath.row] : verticalProducts[indexPath.row]
-            CartManager.shared.addProduct(product)
-            updateCartButton()
+        CartManager.shared.addProduct(product)
+        updateCartButton()
     }
     
     func didTapTrashButton(on cell: ProductListingCollectionViewCell) {
-            guard let indexPath = collectionView.indexPath(for: cell) else {
-                return
-            }
-            CartManager.shared.removeProduct(cell.product)
-            collectionView.reloadItems(at: [indexPath])
+        guard let indexPath = collectionView.indexPath(for: cell) else {
+            return
         }
+        CartManager.shared.removeProduct(cell.product)
+        collectionView.reloadItems(at: [indexPath])
+    }
 }
 
 

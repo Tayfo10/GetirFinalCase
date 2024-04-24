@@ -7,20 +7,20 @@
 
 import UIKit
 
- extension UIFont {
-     static func openSansRegular(size: CGFloat) -> UIFont? {
-         return UIFont(name: "OpenSans-Regular", size: size)
-     }
-     
-     static func openSansBold(size: CGFloat) -> UIFont? {
-         return UIFont(name: "OpenSans-Bold", size: size)
-     }
-     
-     static func openSansSemiBold(size: CGFloat) -> UIFont? {
-         return UIFont(name: "OpenSans-SemiBold", size: size)
-     }
- }
- 
- 
+extension UIFont {
+    static func openSansRegular(size: CGFloat) -> UIFont? {
+        return UIFont(name: "OpenSans-Regular", size: size)
+    }
+    
+    static func openSansBold(size: CGFloat) -> UIFont? {
+        return UIFont(name: "OpenSans-Bold", size: size)
+    }
+    
+    static func openSansSemiBold(size: CGFloat) -> UIFont? {
+        return UIFont(name: "OpenSans-SemiBold", size: size)
+    }
+}
+
+
 
 

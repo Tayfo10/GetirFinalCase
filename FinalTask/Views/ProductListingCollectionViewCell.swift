@@ -71,7 +71,7 @@ class ProductListingCollectionViewCell: UICollectionViewCell {
         button.setImage(UIImage(named: "plusLogo")?.withRenderingMode(.alwaysOriginal), for: .normal)
         button.tintColor = nil
         button.backgroundColor = .clear
-    
+        
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -172,8 +172,8 @@ class ProductListingCollectionViewCell: UICollectionViewCell {
     
     @objc func minusButtonTapped() {
         if product.quantity > 1 {
-        delegate?.didChangeProductQuantity(self, product: product, increment: false)
-        updateQuantityDisplay()
+            delegate?.didChangeProductQuantity(self, product: product, increment: false)
+            updateQuantityDisplay()
         }
     }
     
@@ -204,10 +204,10 @@ class ProductListingCollectionViewCell: UICollectionViewCell {
         addButton.isHidden = false
         addButton.isEnabled = true
         if product.quantity > 0 {
-                addButton.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-            } else {
-                addButton.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-            }
+            addButton.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        } else {
+            addButton.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        }
         
         let newHeight: CGFloat = product.quantity > 0 ? 64.0 : 24.0
         if heightConstraint.constant != newHeight {
